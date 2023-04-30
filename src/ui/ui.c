@@ -10,7 +10,8 @@
 lv_obj_t * ui_MainScreen;
 lv_obj_t * ui_StatusBar;
 lv_obj_t * ui_SignalStrength;
-lv_obj_t * ui_JoyImage;
+lv_obj_t * ui_netImage;
+lv_obj_t * ui_heartImage;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -53,14 +54,24 @@ void ui_MainScreen_screen_init(void)
     lv_obj_set_align(ui_SignalStrength, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_SignalStrength, LV_OBJ_FLAG_CLICK_FOCUSABLE);      /// Flags
 
-    ui_JoyImage = lv_img_create(ui_MainScreen);
-    lv_img_set_src(ui_JoyImage, &ui_img_joy_normal_png);
-    lv_obj_set_width(ui_JoyImage, 48);
-    lv_obj_set_height(ui_JoyImage, 48);
-    lv_obj_set_x(ui_JoyImage, 40);
-    lv_obj_set_y(ui_JoyImage, -9);
-    lv_obj_set_align(ui_JoyImage, LV_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_JoyImage, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE |
+    ui_netImage = lv_img_create(ui_MainScreen);
+    lv_img_set_src(ui_netImage, &ui_img_net_none_png);
+    lv_obj_set_width(ui_netImage, 16);
+    lv_obj_set_height(ui_netImage, 16);
+    lv_obj_set_x(ui_netImage, 58);
+    lv_obj_set_y(ui_netImage, -25);
+    lv_obj_set_align(ui_netImage, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_netImage, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE |
+                      LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE);     /// Flags
+
+    ui_heartImage = lv_img_create(ui_MainScreen);
+    lv_img_set_src(ui_heartImage, &ui_img_heart_white_png);
+    lv_obj_set_width(ui_heartImage, 16);
+    lv_obj_set_height(ui_heartImage, 16);
+    lv_obj_set_x(ui_heartImage, 57);
+    lv_obj_set_y(ui_heartImage, -7);
+    lv_obj_set_align(ui_heartImage, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_heartImage, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE |
                       LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE);     /// Flags
 
 }

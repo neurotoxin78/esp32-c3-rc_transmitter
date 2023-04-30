@@ -7,6 +7,7 @@
 #include <lvgl.h>
 #include <TFT_eSPI.h> // Hardware-specific library
 #include "ui/ui.h"
+#include "network.h"
 
 static const char *TAG = "rc_transmitter";
 static const char *ssid = WIFI_SSID;
@@ -26,7 +27,7 @@ TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); /* TFT instance */
 
 void setup()
 {
-  Serial.begin(115200);
+  Serial.begin(460800);
   init_gpio();
   // Wi-Fi
   wifiReconnectTimer = xTimerCreate("wifiTimer", pdMS_TO_TICKS(2000), pdFALSE, (void *)0, reinterpret_cast<TimerCallbackFunction_t>(connectToWifi));
@@ -73,6 +74,13 @@ void setup()
   lv_indev_enable(indev_keypad, true);
 
   createTasks();
+  if (WiFi.status() != WL_CONNECTED)
+  {
+    udpConnect(addr, port);
+  }
+  // Start UDP Listener
+  udp.listen(port);
+  udp.onPacket(parsePacket);
 }
 
 void loop()
@@ -112,6 +120,8 @@ static void init_gpio()
   pinMode(GPIO_LT_PIN, INPUT_PULLUP);
   pinMode(GPIO_CR_PIN, INPUT_PULLUP);
   pinMode(LED, OUTPUT);
+  pinMode(BTNL_PIN, INPUT_PULLDOWN);
+  pinMode(BTNR_PIN, INPUT_PULLDOWN);
 }
 
 static void indev_keypad_read(lv_indev_drv_t *drv, lv_indev_data_t *data)

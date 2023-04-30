@@ -26,16 +26,16 @@ extern "C" {
 extern lv_obj_t * ui_MainScreen;
 extern lv_obj_t * ui_StatusBar;
 extern lv_obj_t * ui_SignalStrength;
-extern lv_obj_t * ui_JoyImage;
+extern lv_obj_t * ui_netImage;
+extern lv_obj_t * ui_heartImage;
 extern lv_obj_t * ui____initial_actions0;
 
 
-LV_IMG_DECLARE(ui_img_joy_normal_png);    // assets/joy_normal.png
-LV_IMG_DECLARE(ui_img_settings_white_png);    // assets/settings_white.png
-LV_IMG_DECLARE(ui_img_joy_rt_png);    // assets/joy_rt.png
-LV_IMG_DECLARE(ui_img_joy_lf_png);    // assets/joy_lf.png
-LV_IMG_DECLARE(ui_img_joy_dn_png);    // assets/joy_dn.png
-LV_IMG_DECLARE(ui_img_joy_up_png);    // assets/joy_up.png
+LV_IMG_DECLARE(ui_img_net_none_png);    // assets/net_none.png
+LV_IMG_DECLARE(ui_img_heart_white_png);    // assets/heart_white.png
+LV_IMG_DECLARE(ui_img_net_receive_png);    // assets/net_receive.png
+LV_IMG_DECLARE(ui_img_net_send_png);    // assets/net_send.png
+LV_IMG_DECLARE(ui_img_heart_black_png);    // assets/heart_black.png
 
 
 
