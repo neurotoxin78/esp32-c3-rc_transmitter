@@ -11,7 +11,8 @@
 Joystick *joystic;
 
 AsyncUDPMessage udp_command;
-// lv_img_set_src(ui_JoyImage, &ui_img_joy_normal_png);
+
+uint64_t chipid;
 
 TaskHandle_t heartbeat_Handler;
 TaskHandle_t joystic_Handler;
@@ -50,23 +51,42 @@ void CheckJoy(const Joystick::Move move)
   }
 }
 
+void getInfo(){
+    chipid = ESP.getEfuseMac();
+    Serial.printf("ESP32 Chip ID = %04X", (uint16_t)(chipid >> 32));
+    Serial.printf("%08X\n", (uint32_t)chipid);
+    Serial.printf("ChipRevision %d, Cpu Freq %d, SDK Version %s\n", ESP.getChipRevision(), ESP.getCpuFreqMHz(), ESP.getSdkVersion());
+    Serial.println();
+    Serial.printf("Flash Size %d, Flash Speed %d\n", ESP.getFlashChipSize(), ESP.getFlashChipSpeed());
+    Serial.println();
+    Serial.print("Free heap: ");
+    Serial.print(ESP.getFreeHeap());
+    Serial.print(" - Max block: ");
+    Serial.print(ESP.getMaxAllocHeap());
+}
+
 void heartbeat_process(void *parameter)
 {
-
+  uint32_t freeHeap;
+  char buffer[100];
   for (;;)
   {
     digitalWrite(LED, HIGH);
-    lv_img_set_src(ui_heartImage, &ui_img_heart_white_png);
+    lv_img_set_src(ui_heartImage, &ui_img_heart_orange_png);
     vTaskDelay(100 / portTICK_PERIOD_MS);
     digitalWrite(LED, LOW);
-    lv_img_set_src(ui_heartImage, &ui_img_heart_black_png);
+    lv_img_set_src(ui_heartImage, &ui_img_16x16_blank_png);
     vTaskDelay(100 / portTICK_PERIOD_MS);
     digitalWrite(LED, HIGH);
-    lv_img_set_src(ui_heartImage, &ui_img_heart_white_png);
+    lv_img_set_src(ui_heartImage, &ui_img_heart_orange_png);
     vTaskDelay(100 / portTICK_PERIOD_MS);
     digitalWrite(LED, LOW);
-    lv_img_set_src(ui_heartImage, &ui_img_heart_black_png);
-    vTaskDelay(2900 / portTICK_PERIOD_MS);
+    lv_img_set_src(ui_heartImage, &ui_img_16x16_blank_png);
+    vTaskDelay(1900 / portTICK_PERIOD_MS);
+    freeHeap = ESP.getFreeHeap() / 1024;
+    snprintf(buffer, sizeof(buffer), "%dkB", freeHeap);
+    lv_label_set_text(ui_memLabel, buffer);
+
   }
 }
 
@@ -80,7 +100,7 @@ void buttons_Task(void *parameter)
     btnr_state = digitalRead(BTNR_PIN);
     if (btnl_state == HIGH)
     {
-      //Serial.println("BTNL");
+      // Serial.println("BTNL");
       sendPacket("BTNL", addr, port);
     }
     if (btnr_state == LOW)

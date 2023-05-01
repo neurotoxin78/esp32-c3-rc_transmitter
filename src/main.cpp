@@ -12,7 +12,7 @@
 static const char *TAG = "rc_transmitter";
 static const char *ssid = WIFI_SSID;
 static const char *password = WIFI_PASSWORD;
-
+String hostname = "rc-controller";
 TimerHandle_t wifiReconnectTimer;
 
 static const uint16_t screenWidth = SCREEN_WIDTH;
@@ -25,9 +25,10 @@ static lv_indev_t *indev_keypad;
 
 TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); /* TFT instance */
 
+
 void setup()
 {
-  Serial.begin(460800);
+  Serial.begin(115200);
   init_gpio();
   // Wi-Fi
   wifiReconnectTimer = xTimerCreate("wifiTimer", pdMS_TO_TICKS(2000), pdFALSE, (void *)0, reinterpret_cast<TimerCallbackFunction_t>(connectToWifi));
@@ -100,6 +101,7 @@ void WiFiEvent(WiFiEvent_t event)
     break;
   case SYSTEM_EVENT_STA_DISCONNECTED:
     Serial.println("WiFi lost connection, reconnect...");
+    lv_img_set_src(ui_netImage, &ui_img_net_d_png);
     xTimerStart(wifiReconnectTimer, 0);
     break;
   }
@@ -107,7 +109,7 @@ void WiFiEvent(WiFiEvent_t event)
 
 void connectToWifi()
 {
-  // Serial.println("Connecting to Wi-Fi...");
+  WiFi.setHostname(hostname.c_str());
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
 }

@@ -12,6 +12,9 @@ lv_obj_t * ui_StatusBar;
 lv_obj_t * ui_SignalStrength;
 lv_obj_t * ui_netImage;
 lv_obj_t * ui_heartImage;
+lv_obj_t * ui_memLabel;
+lv_obj_t * ui_servoAngle;
+lv_obj_t * ui_speedLabel;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -48,31 +51,59 @@ void ui_MainScreen_screen_init(void)
     ui_SignalStrength = lv_bar_create(ui_MainScreen);
     lv_bar_set_value(ui_SignalStrength, 25, LV_ANIM_OFF);
     lv_obj_set_width(ui_SignalStrength, 4);
-    lv_obj_set_height(ui_SignalStrength, 51);
+    lv_obj_set_height(ui_SignalStrength, 57);
     lv_obj_set_x(ui_SignalStrength, 73);
-    lv_obj_set_y(ui_SignalStrength, -10);
+    lv_obj_set_y(ui_SignalStrength, -6);
     lv_obj_set_align(ui_SignalStrength, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_SignalStrength, LV_OBJ_FLAG_CLICK_FOCUSABLE);      /// Flags
 
     ui_netImage = lv_img_create(ui_MainScreen);
-    lv_img_set_src(ui_netImage, &ui_img_net_none_png);
+    lv_img_set_src(ui_netImage, &ui_img_net_d_png);
     lv_obj_set_width(ui_netImage, 16);
     lv_obj_set_height(ui_netImage, 16);
-    lv_obj_set_x(ui_netImage, 58);
-    lv_obj_set_y(ui_netImage, -25);
+    lv_obj_set_x(ui_netImage, 60);
+    lv_obj_set_y(ui_netImage, -26);
     lv_obj_set_align(ui_netImage, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_netImage, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE |
                       LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE);     /// Flags
 
     ui_heartImage = lv_img_create(ui_MainScreen);
-    lv_img_set_src(ui_heartImage, &ui_img_heart_white_png);
+    lv_img_set_src(ui_heartImage, &ui_img_heart_orange_png);
     lv_obj_set_width(ui_heartImage, 16);
     lv_obj_set_height(ui_heartImage, 16);
-    lv_obj_set_x(ui_heartImage, 57);
-    lv_obj_set_y(ui_heartImage, -7);
+    lv_obj_set_x(ui_heartImage, 60);
+    lv_obj_set_y(ui_heartImage, -3);
     lv_obj_set_align(ui_heartImage, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_heartImage, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE |
                       LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE);     /// Flags
+
+    ui_memLabel = lv_label_create(ui_MainScreen);
+    lv_obj_set_width(ui_memLabel, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_memLabel, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_memLabel, 52);
+    lv_obj_set_y(ui_memLabel, 17);
+    lv_obj_set_align(ui_memLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_memLabel, "___kB");
+    lv_obj_set_style_text_color(ui_memLabel, lv_color_hex(0x9DFFEA), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_memLabel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui_memLabel, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_memLabel, &lv_font_montserrat_10, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_servoAngle = lv_label_create(ui_MainScreen);
+    lv_obj_set_width(ui_servoAngle, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_servoAngle, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_servoAngle, -46);
+    lv_obj_set_y(ui_servoAngle, -28);
+    lv_obj_set_align(ui_servoAngle, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_servoAngle, "S-______");
+
+    ui_speedLabel = lv_label_create(ui_MainScreen);
+    lv_obj_set_width(ui_speedLabel, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_speedLabel, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_speedLabel, 17);
+    lv_obj_set_y(ui_speedLabel, -28);
+    lv_obj_set_align(ui_speedLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_speedLabel, "M___");
 
 }
 

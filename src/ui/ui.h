@@ -28,14 +28,20 @@ extern lv_obj_t * ui_StatusBar;
 extern lv_obj_t * ui_SignalStrength;
 extern lv_obj_t * ui_netImage;
 extern lv_obj_t * ui_heartImage;
+extern lv_obj_t * ui_memLabel;
+extern lv_obj_t * ui_servoAngle;
+extern lv_obj_t * ui_speedLabel;
 extern lv_obj_t * ui____initial_actions0;
 
 
-LV_IMG_DECLARE(ui_img_net_none_png);    // assets/net_none.png
+LV_IMG_DECLARE(ui_img_net_d_png);    // assets/net_d.png
+LV_IMG_DECLARE(ui_img_heart_orange_png);    // assets/heart_orange.png
+LV_IMG_DECLARE(ui_img_heart_black_png);    // assets/heart_black.png
 LV_IMG_DECLARE(ui_img_heart_white_png);    // assets/heart_white.png
+LV_IMG_DECLARE(ui_img_net_none_png);    // assets/net_none.png
 LV_IMG_DECLARE(ui_img_net_receive_png);    // assets/net_receive.png
 LV_IMG_DECLARE(ui_img_net_send_png);    // assets/net_send.png
-LV_IMG_DECLARE(ui_img_heart_black_png);    // assets/heart_black.png
+LV_IMG_DECLARE(ui_img_16x16_blank_png);    // assets/16x16_blank.png
 
 
 
